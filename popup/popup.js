@@ -1,19 +1,18 @@
 "use strict";
 
-let redirectHostDOM = document.getElementById("redirectHost");
+const optionsForm = document.getElementById("optionsForm");
 
 window.browser = window.browser || window.chrome;
 
-browser.storage.local.get(["redirectHost"]).then((result) => {
-	redirectHostDOM.setAttribute("value", result.redirectHost);
+browser.storage.local.get(["host", "port"], (data) => {
+	optionsForm.host.value = data.host;
+	optionsForm.port.value = data.port;
 });
 
-browser.storage.onChanged.addListener((changes) => {
-	if (changes?.redirectHost?.newValue) {
-		redirectHostDOM.setAttribute("value", changes.redirectHost.newValue);
-	}
+optionsForm.host.addEventListener("change", (event) => {
+	browser.storage.local.set({ host: event.target.value });
 });
 
-redirectHostDOM.addEventListener("blur", (event) => {
-	browser.storage.local.set({ redirectHost: event.target.value });
+optionsForm.port.addEventListener("change", (event) => {
+	browser.storage.local.set({ port: event.target.value });
 });

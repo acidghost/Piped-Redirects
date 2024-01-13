@@ -2,12 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
 </head>
 <body>
-    <label for="redirectHost">Redirect Host:</label>
-    <input style="margin-left: 0.4em;" type="text" id="redirectHost"/>
-    <script src="./popup.js"></script>
+    <form id="optionsForm">
+        <label for="host">Redirect Host:</label>
+        <input style="margin-left: 0.4em;" type="text" id="host"/>
+        <label for="port">Port:</label>
+        <input style="width: 5em;" type="number" id="port"/>
+    </form>
+    <script src="popup.js" type="module"></script>
 </body>
 </html>
