@@ -4,7 +4,7 @@ let redirectHostDOM = document.getElementById("redirectHost");
 
 window.browser = window.browser || window.chrome;
 
-browser.storage.sync.get(["redirectHost"]).then((result) => {
+browser.storage.local.get(["redirectHost"]).then((result) => {
 	redirectHostDOM.setAttribute("value", result.redirectHost);
 });
 
@@ -15,5 +15,5 @@ browser.storage.onChanged.addListener((changes) => {
 });
 
 redirectHostDOM.addEventListener("blur", (event) => {
-	browser.storage.sync.set({ redirectHost: event.target.value });
+	browser.storage.local.set({ redirectHost: event.target.value });
 });

@@ -9,17 +9,17 @@ fetch("https://api.invidious.io/instances.json")
 const redirectHostDefault = "piped.video";
 let redirectHost = redirectHostDefault;
 
-browser.storage.sync.get(["redirectHost"], (result) => {
+browser.storage.local.get(["redirectHost"], (result) => {
 	redirectHost = result.redirectHost || redirectHostDefault;
 	if (!result.redirectHost) {
-		browser.storage.sync.set({ redirectHost });
+		browser.storage.local.set({ redirectHost });
 	}
 });
 
 browser.storage.onChanged.addListener((changes) => {
 	redirectHost = changes?.redirectHost?.newValue || redirectHostDefault;
 	if (!changes.redirectHost.newValue) {
-		browser.storage.sync.set({ redirectHost: redirectHostDefault });
+		browser.storage.local.set({ redirectHost: redirectHostDefault });
 	}
 });
 
