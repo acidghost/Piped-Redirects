@@ -1,11 +1,5 @@
 window.browser = window.browser || window.chrome;
 
-const INVIDIOUS_INSTANCES = [];
-
-fetch("https://api.invidious.io/instances.json")
-	.then((resp) => resp.json())
-	.then((array) => array.forEach((json) => INVIDIOUS_INSTANCES.push(json[0])));
-
 const redirectHostDefault = "piped.video";
 let redirectHost = redirectHostDefault;
 
@@ -31,8 +25,7 @@ browser.webRequest.onBeforeRequest.addListener(
 		}
 		if (
 			url.hostname.endsWith("youtube.com") ||
-			url.hostname.endsWith("youtube-nocookie.com") ||
-			INVIDIOUS_INSTANCES.includes(url.hostname)
+			url.hostname.endsWith("youtube-nocookie.com")
 		) {
 			// TODO: write in a cleaner way
 			if (url.pathname.endsWith("/feed/trending")) {
